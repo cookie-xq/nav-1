@@ -1,6 +1,15 @@
 {
+  "scripts": {
+    "build":"rm -rf dist && parcel build src/index.html --no-minify --public-url ./"
+  },
   "devDependencies": {
     "cssnano": "^5.0.1",
     "postcss": "^8.2.13"
-  }
+  },
+  "name": "nav-1",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/cookie-xq/nav-1.git",
+  "author": "fancy <1186710960@qq.com>",
+  "license": "MIT"
 }
