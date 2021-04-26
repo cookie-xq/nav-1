@@ -16,22 +16,25 @@ const simplifyUrl = (url) => {
 
 const render = () =>{
     $siteList.find('li:not(.last)').remove()
-    hashMap.forEach(node=>{
+    hashMap.forEach((node,index)=>{
     const $li = $(`<li>
-        <a href="${node.url}">
-            <div class="site">
-                <div class="logo">${node.logo}</div>
-                <div class="link">${simplifyUrl(node.url)}</div>
-                <div class="close">
-                    <svg class="icon">
-                        <use xlink:href="#icon-close"></use>
-                    </svg>
-                </div>
+        <div class="site">
+            <div class="logo">${node.logo}</div>
+            <div class="link">${simplifyUrl(node.url)}</div>
+            <div class="close">
+                <svg class="icon">
+                    <use xlink:href="#icon-close" href="#icon-close"></use>
+                </svg>
             </div>
-        </a>
+        </div>
     </li>`).insertBefore($lastLi);
+    $li.on('click',()=>{
+        window.open(node.url)
+    })
     $li.on('click','.close',(e)=>{
-        e.stopPropagation()
+        e.stopPropagation() //阻止冒泡
+        hashMap.splice(index,1)
+        render()
     })
 })
 }
@@ -41,7 +44,7 @@ render()
 
 $('.addButton')
     .on('click',()=>{
-        let url = window.prompt('请问你要添加的网址全称是啥？')
+        let url = window.prompt('请输入你要添加的网址：')
         if(url.indexOf('http')!==0){
             //indexOf()方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
             url = 'https://' + url
@@ -57,3 +60,13 @@ $('.addButton')
         const string = JSON.stringify(hashMap)
         localStorage.setItem('x',string)
     }
+
+$(document).on('keypress',(e)=>{
+    console.log(e.key)
+    const {key} = e
+    for(let i = 0; i < hashMap.length; i++){
+        if(hashMap[i].logo.toLowerCase() === key){
+            window.open(hashMap[i].url)
+        }
+    }
+})
