@@ -183,5 +183,8 @@ $(document).on('keypress', function (e) {
     }
   }
 });
+$(document).on('keypress', 'input', function (e) {
+  e.stopPropagation();
+});
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.a2c425e8.js.map
+//# sourceMappingURL=main.cce12286.js.map
