@@ -120,15 +120,18 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 })({"epB2":[function(require,module,exports) {
 var $siteList = $('.siteList');
 var $lastLi = $siteList.find('li.last');
-var x = localStorage.getItem('x');
+var x = localStorage.getItem('xxx');
 var xObject = JSON.parse(x); //转换为对象
 
 var hashMap = xObject || [{
-  logo: 'A',
-  url: 'https://www.acfun.cn'
+  logo: 'G',
+  url: 'https://github.com/'
 }, {
-  logo: 'B',
-  url: 'https://www.bilibili.com'
+  logo: 'J',
+  url: 'https://juejin.im/'
+}, {
+  logo: 'L',
+  url: 'https://leetcode-cn.com/'
 }];
 
 var simplifyUrl = function simplifyUrl(url) {
@@ -138,7 +141,7 @@ var simplifyUrl = function simplifyUrl(url) {
 var render = function render() {
   $siteList.find('li:not(.last)').remove();
   hashMap.forEach(function (node, index) {
-    var $li = $("<li>\n        <div class=\"site\">\n            <div class=\"logo\">".concat(node.logo, "</div>\n            <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n            <div class=\"close\">\n                <svg class=\"icon\">\n                    <use xlink:href=\"#icon-close\" href=\"#icon-close\"></use>\n                </svg>\n            </div>\n        </div>\n    </li>")).insertBefore($lastLi);
+    var $li = $("<li>\n            <div class=\"site\">\n                <div class=\"logo\">".concat(node.logo, "</div>\n                <div class=\"link\">").concat(simplifyUrl(node.url), "</div>\n                <div class=\"close\">\n                    <svg class=\"icon\">\n                        <use xlink:href=\"#icon-close\" href=\"#icon-close\"></use>\n                    </svg>\n                </div>\n            </div>\n        </li>")).insertBefore($lastLi);
     $li.on('click', function () {
       window.open(node.url);
     });
@@ -170,7 +173,8 @@ $('.addButton').on('click', function () {
 
 window.onbeforeunload = function () {
   var string = JSON.stringify(hashMap);
-  localStorage.setItem('x', string);
+  localStorage.setItem('xxx', string);
+  console.log(hashMap);
 };
 
 $(document).on('keypress', function (e) {
@@ -187,4 +191,4 @@ $(document).on('keypress', 'input', function (e) {
   e.stopPropagation();
 });
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.cce12286.js.map
+//# sourceMappingURL=main.8a066e95.js.map
